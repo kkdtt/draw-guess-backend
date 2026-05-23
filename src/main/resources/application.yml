@@ -1,0 +1,25 @@
+server:
+  port: 8080 # 服务器启动端口
+
+spring:
+  datasource:
+    # 注意：draw_guess_db 是我们刚刚建的数据库名
+    url: jdbc:mysql://localhost:3306/draw_guess_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+# ====== 删除原本的 mybatis: 节点，全部合并到 mybatis-plus: 下 ======
+mybatis-plus:
+  # 告诉 MP 去哪里找你自己手写的复杂 SQL 的 XML 文件
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    # 开启驼峰命名自动转换（其实MP默认开启，显式写出来更清晰）
+    map-underscore-to-camel-case: true
+    # 开启底层 SQL 打印日志（极其重要！）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
